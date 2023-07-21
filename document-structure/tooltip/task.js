@@ -15,6 +15,11 @@ arr.forEach((el) => {
   divTip.classList.add('tooltip', 'tooltip_active');
   divTip.innerText = el.title;
   event.preventDefault();
+
+  let tipPosition = el.getBoundingClientRect();
+  divTip.style.top = tipPosition.top + 22 + 'px';
+  divTip.style.left = tipPosition.left + 'px';
+
   document.body.append(divTip);
  }
 }
