@@ -18,7 +18,7 @@ qInc.forEach((el) => {
 
 qDec.forEach((el) => {
   el.onclick = () => {
-    if (el.parentElement.querySelector('.product__quantity-value').innerText > 0) {
+    if (el.parentElement.querySelector('.product__quantity-value').innerText > 1) {
       el.parentElement.querySelector('.product__quantity-value').innerText--;
     }
   }
@@ -30,21 +30,19 @@ addProduct.forEach((el) => {
     const qInCart = el.parentElement.querySelector('.product__quantity-value').innerText;
     const img = el.closest('.product').querySelector('img').getAttribute('src');
     const dataId = el.closest('.product').dataset.id;
-    const alreadyInCart = [...document.querySelectorAll('.cart__product')];
-    const countInCart = [...document.querySelectorAll(".cart__product-count")];
-    const index = product.findIndex(el => el.dataset.id === dataId);
+    const alreadyInCart = [...document.querySelectorAll('.cart__product')];    
 
     let findInCart = alreadyInCart.find(
       (element) => element.dataset.id === dataId
     );
 
     if (findInCart) {
-      countInCart[index].innerText =
-        Number(countInCart[index].innerText) + Number(qInCart);
+      findInCart.lastElementChild.innerHTML =
+      Number(findInCart.lastElementChild.innerHTML) + Number(qInCart);
 
     } else {
 
-      cart[0].insertAdjacentHTML('beforeend',
+      cart[0].insertAdjacentHTML('afterbegin',
         `
   <div class="cart__product" data-id="${dataId}">
   <img class="cart__product-image" src="${img}">
